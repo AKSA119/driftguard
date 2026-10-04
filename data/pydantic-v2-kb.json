@@ -1,0 +1,63 @@
+[
+  {
+    "id": "pydantic-001",
+    "ecosystem": "pydantic",
+    "feature": "class Config Deprecated in Pydantic v2",
+    "deprecatedPattern": "class Config:\n        orm_mode = True",
+    "replacementPattern": "model_config = ConfigDict(from_attributes=True)",
+    "deprecatedIn": "v2.0.0",
+    "removedIn": "v3.0.0",
+    "severity": "HIGH",
+    "summary": "Inner 'class Config:' is deprecated in Pydantic v2 in favor of 'model_config = ConfigDict(...)'.",
+    "sourceUrl": "https://docs.pydantic.dev/latest/migration/#changes-to-config",
+    "sourceTitle": "Pydantic Migration Guide: v1 to v2",
+    "sourceSection": "Changes to Config",
+    "contradiction": {
+      "hasConflict": true,
+      "conflictingClaim": "Legacy FastAPI tutorials instantiate models using 'class Config: orm_mode = True'.",
+      "officialClaim": "Pydantic v2 replaces 'orm_mode = True' with 'from_attributes = True' inside ConfigDict.",
+      "resolution": "Resolved in Sanity Studio: Deprecate orm_mode; standardize on ConfigDict(from_attributes=True).",
+      "resolvedBy": "Schema Governance Team",
+      "resolvedAt": "2024-08-10T16:45:00Z"
+    }
+  },
+  {
+    "id": "pydantic-002",
+    "ecosystem": "pydantic",
+    "feature": "@validator Deprecated in favor of @field_validator",
+    "deprecatedPattern": "@validator('username')",
+    "replacementPattern": "@field_validator('username')",
+    "deprecatedIn": "v2.0.0",
+    "removedIn": "v3.0.0",
+    "severity": "HIGH",
+    "summary": "@validator and @root_validator are deprecated in favor of @field_validator and @model_validator.",
+    "sourceUrl": "https://docs.pydantic.dev/latest/migration/#changes-to-validators",
+    "sourceTitle": "Pydantic Validators Evolution",
+    "sourceSection": "Field vs Model Validators",
+    "contradiction": {
+      "hasConflict": true,
+      "conflictingClaim": "Old StackOverflow answers recommend @validator with 'pre=True' for field transformation.",
+      "officialClaim": "@field_validator(mode='before') replaces @validator(pre=True) with strict classmethod typing.",
+      "resolution": "Resolved in Sanity Studio: @field_validator is the enforced v2 standard.",
+      "resolvedBy": "Python Core Group",
+      "resolvedAt": "2024-08-10T17:00:00Z"
+    }
+  },
+  {
+    "id": "pydantic-003",
+    "ecosystem": "pydantic",
+    "feature": ".dict() and .json() Methods Deprecated",
+    "deprecatedPattern": "user.dict()",
+    "replacementPattern": "user.model_dump()",
+    "deprecatedIn": "v2.0.0",
+    "removedIn": "v3.0.0",
+    "severity": "MEDIUM",
+    "summary": "The .dict() and .json() methods have been renamed to .model_dump() and .model_dump_json() to prevent namespace collisions.",
+    "sourceUrl": "https://docs.pydantic.dev/latest/migration/#model-methods-and-attributes",
+    "sourceTitle": "Pydantic v2 Migration: Methods and Attributes",
+    "sourceSection": "Renamed Methods",
+    "contradiction": {
+      "hasConflict": false
+    }
+  }
+]

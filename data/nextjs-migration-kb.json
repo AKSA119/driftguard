@@ -1,0 +1,63 @@
+[
+  {
+    "id": "nextjs-001",
+    "ecosystem": "nextjs",
+    "feature": "Async Request APIs (Next.js 15)",
+    "deprecatedPattern": "const { id } = params;",
+    "replacementPattern": "const { id } = await params;",
+    "deprecatedIn": "v15.0.0",
+    "removedIn": "v16.0.0",
+    "severity": "CRITICAL",
+    "summary": "In Next.js 15, dynamic route parameters (params), searchParams, cookies(), and headers() are asynchronous Promises and must be awaited.",
+    "sourceUrl": "https://nextjs.org/docs/messages/sync-dynamic-apis",
+    "sourceTitle": "Next.js 15 Release Notes & Async Request APIs RFC",
+    "sourceSection": "Breaking Changes: Dynamic APIs are Asynchronous",
+    "contradiction": {
+      "hasConflict": true,
+      "conflictingClaim": "Hundreds of Next.js 13/14 tutorials access 'params.id' synchronously inside Server Components.",
+      "officialClaim": "Next.js 15 throws a build/runtime warning and halts synchronous params access to prepare for React 19 microtask scheduling.",
+      "resolution": "Resolved in Sanity Studio: Next.js 15 Async RFC is enforced across all modern server components.",
+      "resolvedBy": "Framework Standards Committee",
+      "resolvedAt": "2024-10-22T14:00:00Z"
+    }
+  },
+  {
+    "id": "nextjs-002",
+    "ecosystem": "nextjs",
+    "feature": "getServerSideProps in App Router",
+    "deprecatedPattern": "export async function getServerSideProps",
+    "replacementPattern": "Direct async/await inside React Server Component",
+    "deprecatedIn": "v13.0.0",
+    "removedIn": "v15.0.0 (in app/ directory)",
+    "severity": "CRITICAL",
+    "summary": "getServerSideProps is invalid inside the app/ directory. Data fetching should be performed directly within async Server Components or via Route Handlers.",
+    "sourceUrl": "https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration",
+    "sourceTitle": "App Router Incremental Migration Guide",
+    "sourceSection": "Migrating Data Fetching Methods",
+    "contradiction": {
+      "hasConflict": true,
+      "conflictingClaim": "ChatGPT frequently outputs 'export async function getServerSideProps' when asked to fetch data dynamically in Next.js.",
+      "officialClaim": "App Router completely ignores or errors out on getServerSideProps; components are natively async.",
+      "resolution": "Resolved in Sanity Studio: Prohibit Pages Router data-fetching primitives in app router files.",
+      "resolvedBy": "Documentation Lead",
+      "resolvedAt": "2024-09-18T11:20:00Z"
+    }
+  },
+  {
+    "id": "nextjs-003",
+    "ecosystem": "nextjs",
+    "feature": "next/headers cookies() Synchronous Access",
+    "deprecatedPattern": "const cookieStore = cookies(); const token = cookieStore.get('token');",
+    "replacementPattern": "const cookieStore = await cookies(); const token = cookieStore.get('token');",
+    "deprecatedIn": "v15.0.0-rc",
+    "removedIn": "v16.0.0",
+    "severity": "HIGH",
+    "summary": "cookies() and headers() from 'next/headers' now return a Promise in Next.js 15.",
+    "sourceUrl": "https://nextjs.org/docs/app/api-reference/functions/cookies",
+    "sourceTitle": "Next.js Cookies API Reference",
+    "sourceSection": "Version History",
+    "contradiction": {
+      "hasConflict": false
+    }
+  }
+]

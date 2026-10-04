@@ -1,0 +1,63 @@
+[
+  {
+    "id": "ai-sdk-001",
+    "ecosystem": "vercel-ai-sdk",
+    "feature": "StreamingTextResponse Deprecation",
+    "deprecatedPattern": "new StreamingTextResponse(stream)",
+    "replacementPattern": "return result.toDataStreamResponse();",
+    "deprecatedIn": "v3.1.0",
+    "removedIn": "v4.0.0",
+    "severity": "CRITICAL",
+    "summary": "StreamingTextResponse was deprecated and replaced by model-driven stream helpers (toDataStreamResponse / toTextStreamResponse).",
+    "sourceUrl": "https://sdk.vercel.ai/docs/reference/ai-sdk-ui/streaming-text-response",
+    "sourceTitle": "Vercel AI SDK Core Migration Guide (v3.x to v4.x)",
+    "sourceSection": "Migration: Streaming Responses",
+    "contradiction": {
+      "hasConflict": true,
+      "conflictingClaim": "2023-2024 AI tutorials recommend wrapping all model output in 'new StreamingTextResponse(stream)'.",
+      "officialClaim": "AI SDK v4 deprecates StreamingTextResponse in favor of streamText() / toDataStreamResponse() for type-safe tool calling and telemetry.",
+      "resolution": "Resolved in Sanity Studio: Official Release Notes (v4.0.0) take absolute precedence over legacy tutorials.",
+      "resolvedBy": "Lead AI Architect (Editorial Override in Sanity)",
+      "resolvedAt": "2024-11-15T10:30:00Z"
+    }
+  },
+  {
+    "id": "ai-sdk-002",
+    "ecosystem": "vercel-ai-sdk",
+    "feature": "OpenAIStream Deprecation",
+    "deprecatedPattern": "OpenAIStream(response)",
+    "replacementPattern": "const result = streamText({ model: openai('gpt-4o'), prompt });",
+    "deprecatedIn": "v3.2.0",
+    "removedIn": "v4.0.0",
+    "severity": "HIGH",
+    "summary": "OpenAIStream adapter is deprecated. Use the unified streamText() or generateText() functions with provider packages (@ai-sdk/openai).",
+    "sourceUrl": "https://sdk.vercel.ai/docs/ai-sdk-core/overview",
+    "sourceTitle": "AI SDK Core Unified Provider Specification",
+    "sourceSection": "Core APIs",
+    "contradiction": {
+      "hasConflict": true,
+      "conflictingClaim": "Older guides suggest importing 'OpenAIStream' from 'ai' package for streaming ChatGPT completions.",
+      "officialClaim": "Unified streamText() from 'ai' with '@ai-sdk/openai' replaces provider-specific stream wrappers.",
+      "resolution": "Resolved in Sanity Studio: Provider-specific stream helpers are archived.",
+      "resolvedBy": "Sanity Content Ops",
+      "resolvedAt": "2024-12-01T08:00:00Z"
+    }
+  },
+  {
+    "id": "ai-sdk-003",
+    "ecosystem": "vercel-ai-sdk",
+    "feature": "AIStreamCallbacks Deprecated",
+    "deprecatedPattern": "experimental_onFunctionCall",
+    "replacementPattern": "tools: { ... } inside generateText or streamText",
+    "deprecatedIn": "v3.0.0",
+    "removedIn": "v4.0.0",
+    "severity": "HIGH",
+    "summary": "Legacy experimental function calling callbacks were replaced by the formal type-safe tools parameter with Zod schema validation.",
+    "sourceUrl": "https://sdk.vercel.ai/docs/ai-sdk-core/tools-and-tool-calling",
+    "sourceTitle": "AI SDK Tools & Structured Outputs",
+    "sourceSection": "Tool Calling Specification",
+    "contradiction": {
+      "hasConflict": false
+    }
+  }
+]
